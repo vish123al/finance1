@@ -1,16 +1,13 @@
-FROM node:argon
+FROM python:3.5
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-#RUN ./install.sh
-#RUN ./manage.py
-# Install app dependencies
-COPY package.json /usr/src/app/
-RUN npm install
+ENV PYTHONUNBUFFERED=1
 
-# Bundle app source
-COPY . /usr/src/app
+RUN mkdir /code
 
-EXPOSE 8080 8081
-CMD [ "npm", "start" ]
+WORKDIR /code
+
+ADD requirements.txt /code/
+
+RUN pip install -r requirements.txt
+
+ADD . /code/
