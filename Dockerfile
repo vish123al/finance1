@@ -9,6 +9,7 @@ WORKDIR /code
 ADD requirements.txt /code/
 
 RUN pip install -r requirements.txt
-RUN /install.sh
+ADD install.sh /root/install.sh
+CMD [./install]
 
 ADD . /code/
